@@ -1,3 +1,4 @@
+import { UserService } from './services/user.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 import { environment } from '../environments/environment';
@@ -56,7 +57,7 @@ import { RouterModule } from '@angular/router';
     ]),
     NgbModule.forRoot(),
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, AuthGuard, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
