@@ -11,6 +11,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CustomFormsModule } from 'ng2-validation';
 
 import { AppComponent } from './app.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
@@ -63,7 +64,8 @@ import { FormsModule } from '@angular/forms';
       { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuard, AdminGuard] },
     ]),
     NgbModule.forRoot(),
-    FormsModule
+    FormsModule,
+    CustomFormsModule
   ],
   providers: [AuthService, AuthGuard, UserService, AdminGuard, CategoryService, ProductService],
   bootstrap: [AppComponent]
