@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/of';
 
 @Injectable()
 export class AuthService {
@@ -18,7 +19,10 @@ export class AuthService {
 
   login() {
     let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
-    localStorage.setItem('returnUrl', returnUrl);
+    if (returnUrl) {
+      localStorage.setItem('returnUrl', returnUrl);
+    }
+
     this.afAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
   }
 
@@ -28,6 +32,12 @@ export class AuthService {
 
   get appUser$(): Observable<AppUser> {
     return this.user$
-      .switchMap(user => this.userService.get(user.uid));
+      .switchMap(user => {
+        if (user) {
+          return this.userService.get(user.uid);
+        }
+
+        return Observable.of(null);
+      });
   }
 }

@@ -16,11 +16,11 @@ export class AppComponent {
         this.userService.save(user);
 
         let returnUrl = localStorage.getItem('returnUrl');
-        if (returnUrl) {
+        if (returnUrl && returnUrl.length > 0) {
           this.router.navigateByUrl(returnUrl);
           localStorage.removeItem('returnUrl');
         }
       }
-    })
+    });
   }
 }
