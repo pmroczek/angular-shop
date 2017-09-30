@@ -4,6 +4,7 @@ import { CategoryService } from '../services/category.service';
 import { ProductService } from '../services/product.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Product } from '../models/product';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-products',
@@ -12,8 +13,8 @@ import { Product } from '../models/product';
 })
 
 export class ProductsComponent implements OnDestroy {
-  products: Product[];
-  allProducts: Product[];
+  products: Product[] = [];
+  allProducts: Product[] = [];
   subscribcion: Subscription;
   categories$;
   category;
@@ -22,16 +23,16 @@ export class ProductsComponent implements OnDestroy {
     private productService: ProductService,
     private categoryService: CategoryService,
     private route: ActivatedRoute) {
-    this.subscribcion = productService.getAll().subscribe(products => {
+    this.subscribcion = productService.getAll()
+    .switchMap(products => {
       this.allProducts = products;
+      return route.queryParamMap;
+    }).subscribe(param => {
+      this.category = param.get('category');
       this.filter(this.category);
     });
 
     this.categories$ = categoryService.getAll();
-    this.route.queryParamMap.subscribe(param => {
-      this.category = param.get('category');
-      this.filter(this.category);
-    });
   }
 
   public ngOnDestroy(): void {
@@ -39,10 +40,6 @@ export class ProductsComponent implements OnDestroy {
   }
 
   private filter(category: string) {
-    if (!this.allProducts) {
-      return;
-    }
-
     this.products = (category)
       ? this.allProducts.filter(product => product.category.includes(category))
       : this.allProducts;
