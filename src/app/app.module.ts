@@ -12,6 +12,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomFormsModule } from 'ng2-validation';
+import { DataTableModule } from 'angular-4-data-table';
 
 import { AppComponent } from './app.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
@@ -66,7 +67,8 @@ import { FormsModule } from '@angular/forms';
     ]),
     NgbModule.forRoot(),
     FormsModule,
-    CustomFormsModule
+    CustomFormsModule,
+    DataTableModule
   ],
   providers: [AuthService, AuthGuard, UserService, AdminGuard, CategoryService, ProductService],
   bootstrap: [AppComponent]
