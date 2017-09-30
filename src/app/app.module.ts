@@ -1,3 +1,4 @@
+import { ProductService } from './services/product.service';
 import { CategoryService } from './services/category.service';
 import { AdminGuard } from './services/admin-guard.service';
 import { UserService } from './services/user.service';
@@ -24,6 +25,7 @@ import { AdminProductsComponent } from './admin/admin-products/admin-products.co
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { RouterModule } from '@angular/router';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -61,8 +63,9 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
       { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuard, AdminGuard] },
     ]),
     NgbModule.forRoot(),
+    FormsModule
   ],
-  providers: [AuthService, AuthGuard, UserService, AdminGuard, CategoryService],
+  providers: [AuthService, AuthGuard, UserService, AdminGuard, CategoryService, ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
