@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { AppComponent } from './app.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 import { HomeComponent } from './home/home.component';
@@ -16,6 +18,7 @@ import { LoginComponent } from './login/login.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { RouterModule } from '@angular/router';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +48,7 @@ import { RouterModule } from '@angular/router';
       { path: 'admin/products', component: AdminProductsComponent },
       { path: 'admin/orders', component: AdminOrdersComponent },
     ]),
+    NgbModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
