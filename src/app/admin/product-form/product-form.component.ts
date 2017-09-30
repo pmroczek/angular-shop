@@ -13,7 +13,7 @@ export class ProductFormComponent implements OnInit {
 
   categories$;
   product = {};
-  private id;
+  id;
 
   constructor(
     private categoryService: CategoryService,
@@ -38,6 +38,20 @@ export class ProductFormComponent implements OnInit {
     } else {
       this.productService.create(product);
     }
+
+    this.navigateToProducts();
+  }
+
+  delete(productId) {
+    if (!confirm('Are you sure to you want delete this product?')) {
+      return;
+    }
+
+    this.productService.delete(productId);
+    this.navigateToProducts();
+  }
+
+  private navigateToProducts() {
     this.router.navigate(['/admin/products']);
   }
 }
