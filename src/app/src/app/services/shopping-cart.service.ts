@@ -17,18 +17,19 @@ export class ShoppingCartService {
       });
   }
 
+  public async getCart() {
+    let cartId = await this.getOrCreateCartId();
+    return this.db.object('/shopping-carts/' + cartId);
+  }
+
   private getItem(cartId: string, productId: string) {
-    return this.db.object('/shopping-cart/' + cartId + '/items' + productId);
+    return this.db.object('/shopping-carts/' + cartId + '/items/' + productId);
   }
 
   private create() {
     return this.db.list('/shopping-carts').push({
       dateCreated: new Date().getTime()
     });
-  }
-
-  private getCart(cartId: string) {
-    return this.db.object('/shopping-cart/' + cartId);
   }
 
   private async getOrCreateCartId(): Promise<string> {
