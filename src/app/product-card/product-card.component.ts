@@ -1,3 +1,4 @@
+import { Cart } from '../models/cart';
 import { ShoppingCartService } from '../src/app/services/shopping-cart.service';
 import { ShoppingCartComponent } from '../shopping-cart/shopping-cart.component';
 import { Component, Input, OnInit } from '@angular/core';
@@ -12,7 +13,7 @@ export class ProductCardComponent implements OnInit {
 
   @Input('product') product: Product;
   @Input('show-actions') showActions: boolean = true;
-  @Input('shopping-cart') shoppingCart;
+  @Input('shopping-cart') shoppingCart: Cart;
 
   constructor(private cartService: ShoppingCartService) { }
 

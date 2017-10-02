@@ -5,6 +5,7 @@ import { ProductService } from '../services/product.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Product } from '../models/product';
 import 'rxjs/add/operator/switchMap';
+import { Cart } from '../models/cart';
 
 @Component({
   selector: 'app-products',
@@ -19,7 +20,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   subscribcion: Subscription;
   cartSubscribcion: Subscription;
   category: string;
-  cart;
+  cart: Cart;
 
   constructor(
     private productService: ProductService,
