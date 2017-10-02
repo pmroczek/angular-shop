@@ -17,6 +17,16 @@ export class ShoppingCartService {
       });
   }
 
+  public async removeFromCart(product: Product) {
+    let cartId = await this.getOrCreateCartId();
+    let item$ = this.getItem(cartId, product.$key);
+    item$
+      .take(1).subscribe(item => {
+        let quantity = item.quantity > 1 ? item.quantity - 1 : 0;
+        item$.update({ quantity: quantity });
+      });
+  }
+
   public async getCart() {
     let cartId = await this.getOrCreateCartId();
     return this.db.object('/shopping-carts/' + cartId);
